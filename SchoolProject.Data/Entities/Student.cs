@@ -18,7 +18,6 @@ namespace SchoolProject.Data._ُEntities
         public int Phone { get; set; }
         public int? DIO {  get; set; }
         [ForeignKey("DIO")]
-        [InverseProperty("Students")]
         public virtual Department Departments { get; set; }
     }
 }
