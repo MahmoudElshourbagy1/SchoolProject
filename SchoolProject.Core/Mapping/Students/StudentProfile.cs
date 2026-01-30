@@ -1,9 +1,4 @@
 ﻿using AutoMapper;
-using SchoolProject.Core.Features.Students.Queries.Resuilts;
-using SchoolProject.Data._ُEntities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SchoolProject.Core.Mapping.Students
 {
@@ -14,6 +9,7 @@ namespace SchoolProject.Core.Mapping.Students
             GetStudnetListMapping();
             GetStudnetByIdMapping();
             AddStudentCommandMapping();
+            EditStudentCommandMapping();
         }
     }
 }
