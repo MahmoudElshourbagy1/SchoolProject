@@ -35,22 +35,38 @@ namespace SchoolProject.Service.implementations
             return "Success";
         }
 
-        public async Task<bool> IsNameExistAsync(string name)
+        public async Task<bool> IsNameArExist(string nameAr)
         {
-            return await _studentRepository
-                .GetTableNoTracking()
-                .AnyAsync(x => x.Name == name);
+            //Check if the name is Exist Or not
+            var student = _studentRepository.GetTableNoTracking().Where(x => x.NameAr.Equals(nameAr)).FirstOrDefault();
+            if (student == null) return false;
+            return true;
         }
 
 
 
-        public async Task<bool> IsNameExisExcludeSelfAsync(string name, int id)
+        public async Task<bool> IsNameArExistExcludeSelf(string nameAr, int id)
         {
-            return await _studentRepository
-                .GetTableNoTracking()
-                .AnyAsync(x => x.Name == name && x.StudID != id);
+            //Check if the name is Exist Or not
+            var student = await _studentRepository.GetTableNoTracking().Where(x => x.NameAr.Equals(nameAr) & !x.StudID.Equals(id)).FirstOrDefaultAsync();
+            if (student == null) return false;
+            return true;
+        }
+        public async Task<bool> IsNameEnExist(string nameEn)
+        {
+            //Check if the name is Exist Or not
+            var student = _studentRepository.GetTableNoTracking().Where(x => x.NameEn.Equals(nameEn)).FirstOrDefault();
+            if (student == null) return false;
+            return true;
         }
 
+        public async Task<bool> IsNameEnExistExcludeSelf(string nameEn, int id)
+        {
+            //Check if the name is Exist Or not
+            var student = await _studentRepository.GetTableNoTracking().Where(x => x.NameEn.Equals(nameEn) & !x.StudID.Equals(id)).FirstOrDefaultAsync();
+            if (student == null) return false;
+            return true;
+        }
         public async Task<string> EditAsync(Student student)
         {
             await _studentRepository.UpdateAsync(student);
@@ -93,7 +109,7 @@ namespace SchoolProject.Service.implementations
             var querable = _studentRepository.GetTableNoTracking().Include(x => x.Departments).AsQueryable();
             if (search != null)
             {
-                querable = querable.Where(x => x.Name.Contains(search) || x.Address.Contains(search) || x.Departments.DName.Contains(search));
+                querable = querable.Where(x => x.NameAr.Contains(search) || x.Address.Contains(search) || x.Departments.DNameAr.Contains(search));
             }
             switch (studentEnum)
             {
@@ -101,13 +117,13 @@ namespace SchoolProject.Service.implementations
                     querable = querable.OrderBy(x => x.StudID);
                     break;
                 case StudentEnum.Name:
-                    querable = querable.OrderBy(x => x.Name);
+                    querable = querable.OrderBy(x => x.NameAr);
                     break;
                 case StudentEnum.Address:
                     querable = querable.OrderBy(x => x.Address);
                     break;
                 case StudentEnum.DepartmentName:
-                    querable = querable.OrderBy(x => x.Departments.DName);
+                    querable = querable.OrderBy(x => x.Departments.DNameAr);
                     break;
                 default:
                     querable = querable.OrderBy(x => x.StudID);

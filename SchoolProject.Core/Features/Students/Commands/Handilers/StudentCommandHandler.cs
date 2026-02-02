@@ -51,7 +51,7 @@ namespace SchoolProject.Core.Features.Students.Commands.Handilers
             //return NotFound<string>("student not found");
             if (student == null) return NotFound<string>("student not found");
             //mapping Between req and student
-            var studentmapper = _mapper.Map<Student>(request);
+            var studentmapper = _mapper.Map(request, student);
             //call update method from service
             var result = await _studentService.EditAsync(studentmapper);
             //return Success("Updated Success");

@@ -1,5 +1,7 @@
 ﻿using FluentValidation;
+using Microsoft.Extensions.Localization;
 using SchoolProject.Core.Features.Students.Commands.Models;
+using SchoolProject.Core.Resources;
 using SchoolProject.Service.Abstracts;
 
 
@@ -8,31 +10,39 @@ namespace SchoolProject.Core.Features.Students.Commands.Validations
     public class AddStudentValidator : AbstractValidator<AddStudentCommand>
     {
         private readonly IStudentService _studentService;
-        public AddStudentValidator(IStudentService studentService)
+        private readonly IStringLocalizer<SharedResources> _localizer;
+        public AddStudentValidator(IStudentService studentService, IStringLocalizer<SharedResources> localizer)
         {
             _studentService = studentService;
+            _localizer = localizer;
             ApplyValidationRules();
             ApplyCustomValidationRules();
 
         }
         public void ApplyValidationRules()
         {
-            RuleFor(x => x.Name)
-                .NotEmpty().WithMessage("{PropertyName} is required")
-                .MaximumLength(100).WithMessage("{PropertyName} must not exceed 100 characters")
-                .NotNull().WithMessage("{PropertyName} must not be null");
+            RuleFor(x => x.NameAr)
+                .NotEmpty().WithMessage(_localizer[SharedResourcesKeys.NotEmpty])
+                 .NotNull().WithMessage(_localizer[SharedResourcesKeys.RequiredField])
+                 .MaximumLength(100).WithMessage(_localizer[SharedResourcesKeys.MaxLengthis100]);
             RuleFor(x => x.Address)
-                .NotEmpty().WithMessage("{PropertyName} is required")
-                .MaximumLength(200).WithMessage("{PropertyName} must not exceed 200 characters");
+                .NotEmpty().WithMessage(_localizer[SharedResourcesKeys.NotEmpty])
+                .NotNull().WithMessage(_localizer[SharedResourcesKeys.RequiredField])
+                .MaximumLength(100).WithMessage(_localizer[SharedResourcesKeys.MaxLengthis100]);
             RuleFor(x => x.DepartmementId)
-                .GreaterThan(0).WithMessage("{PropertyName} must be greater than 0");
+                .NotEmpty().WithMessage(_localizer[SharedResourcesKeys.NotEmpty])
+                 .NotNull().WithMessage(_localizer[SharedResourcesKeys.RequiredField]);
         }
         public void ApplyCustomValidationRules()
         {
-            RuleFor(x => x.Name)
+            RuleFor(x => x.NameAr)
      .MustAsync(async (name, cancellation) =>
-         !await _studentService.IsNameExistAsync(name))
-     .WithMessage("Student name already exists");
+         !await _studentService.IsNameArExist(name))
+     .WithMessage(_localizer[SharedResourcesKeys.IsExist]);
+            RuleFor(x => x.NameEn)
+            .MustAsync(async (name, cancellation) =>
+                !await _studentService.IsNameEnExist(name))
+            .WithMessage(_localizer[SharedResourcesKeys.IsExist]);
         }
     }
 }

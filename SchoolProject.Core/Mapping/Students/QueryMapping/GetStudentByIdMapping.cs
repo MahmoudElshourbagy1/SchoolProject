@@ -1,8 +1,5 @@
 ﻿using SchoolProject.Core.Features.Students.Queries.Resuilts;
 using SchoolProject.Data._ُEntities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SchoolProject.Core.Mapping.Students
 {
@@ -11,7 +8,8 @@ namespace SchoolProject.Core.Mapping.Students
         public void GetStudnetByIdMapping()
         {
             CreateMap<Student, GetSingleStudentRes>()
-               .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src => src.Departments.DName));
+               .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src => src.Departments.Localize(src.Departments.DNameAr, src.Departments.DNameEn)))
+                              .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Localize(src.NameAr, src.NameEn)));
         }
     }
 }

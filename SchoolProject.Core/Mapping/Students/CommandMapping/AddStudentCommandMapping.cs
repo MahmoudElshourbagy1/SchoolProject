@@ -1,9 +1,5 @@
 ﻿using SchoolProject.Core.Features.Students.Commands.Models;
-using SchoolProject.Core.Features.Students.Queries.Resuilts;
 using SchoolProject.Data._ُEntities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SchoolProject.Core.Mapping.Students
 {
@@ -11,10 +7,18 @@ namespace SchoolProject.Core.Mapping.Students
     {
         public void AddStudentCommandMapping()
         {
-            CreateMap<AddStudentCommand,Student>()
+            CreateMap<AddStudentCommand, Student>()
                .ForMember(
                 dest => dest.DIO,
                 opt => opt.MapFrom(src => src.DepartmementId)
+                )
+               .ForMember(
+                dest => dest.NameEn,
+                opt => opt.MapFrom(src => src.NameEn)
+                )
+            .ForMember(
+                dest => dest.NameAr,
+                opt => opt.MapFrom(src => src.NameAr)
                 );
         }
     }

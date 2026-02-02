@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SchoolProject.Data._ُEntities;
 using SchoolProject.Data.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Reflection;
 
 namespace SchoolProject.infrustructure.Data
 {
@@ -16,11 +14,16 @@ namespace SchoolProject.infrustructure.Data
         public AppBDContext()
         {
         }
-        public DbSet<Department>departments { get; set; }
+        public DbSet<Department> departments { get; set; }
         public DbSet<Student> students { get; set; }
-        public DbSet<DepartmetSubject>departmetSubjects { get; set; }
-        public DbSet<Subjects>subjects { get; set; }
+        public DbSet<DepartmentSubject> departmentSubjects { get; set; }
+        public DbSet<Subjects> subjects { get; set; }
         public DbSet<StudentSubject> studentSubjects { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        }
 
     }
 }
