@@ -1,6 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using SchoolProject.infrustructure.Abstracts;
-using SchoolProject.infrustructure.Repositories;
 using SchoolProject.Service.Abstracts;
 using SchoolProject.Service.implementations;
 
@@ -12,7 +10,8 @@ namespace SchoolProject.Service
         {
             // Here you can add your infrastructure dependencies
             services.AddTransient<IStudentService, StudentService>();
-            
+            services.AddTransient<IDepartmentService, DepartmentService>();
+
             return services;
         }
 

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchoolProject.infrustructure.Data;
 
@@ -10,9 +11,11 @@ using SchoolProject.infrustructure.Data;
 namespace SchoolProject.infrustructure.Migrations
 {
     [DbContext(typeof(AppBDContext))]
-    partial class AppBDContextModelSnapshot : ModelSnapshot
+    [Migration("20260204112520_fixDepartmentStudentCountPro")]
+    partial class fixDepartmentStudentCountPro
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

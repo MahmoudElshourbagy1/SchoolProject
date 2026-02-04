@@ -1,0 +1,9 @@
+﻿using SchoolProject.Data._ُEntities;
+using SchoolProject.infrustructure.infrustructureBase;
+
+namespace SchoolProject.infrustructure.Abstracts
+{
+    public interface IDepartmentRepository : IGenericRepositoryAsync<Department>
+    {
+    }
+}

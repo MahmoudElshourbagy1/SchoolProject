@@ -1,0 +1,29 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using SchoolProject.Api.Base;
+using SchoolProject.Core.Features.Department.Queries.Models;
+using SchoolProject.Data.AppMetaData;
+
+namespace SchoolProject.Api.Controllers
+{
+    [ApiController]
+    public class DepartmentController : AppControllerBase
+    {
+        [HttpGet(Router.DepartmentRouting.GetByID)]
+        public async Task<IActionResult> GetDepartmentById([FromQuery] GetDepartmentByIdQuery query)
+        {
+            var res = await Mediator.Send(query);
+            return NewResult(res);
+        }
+        [HttpGet(Router.DepartmentRouting.GetDepartmentStudentsCount)]
+        public async Task<IActionResult> GetDepartmentStudentsCount()
+        {
+            return NewResult(await Mediator.Send(new GetDepartmentStudentListCountQuery()));
+        }
+
+        [HttpGet(Router.DepartmentRouting.GetDepartmentStudentsCountById)]
+        public async Task<IActionResult> GetDepartmentStudentsCountById([FromRoute] int id)
+        {
+            return NewResult(await Mediator.Send(new GetDepartmentStudentCountByIDQuery() { DIO = id }));
+        }
+    }
+}

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SchoolProject.infrustructure.Data;
 
@@ -10,9 +11,11 @@ using SchoolProject.infrustructure.Data;
 namespace SchoolProject.infrustructure.Migrations
 {
     [DbContext(typeof(AppBDContext))]
-    partial class AppBDContextModelSnapshot : ModelSnapshot
+    [Migration("20260204110603_AddProcedures_AddViews")]
+    partial class AddProcedures_AddViews
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -135,11 +138,11 @@ namespace SchoolProject.infrustructure.Migrations
 
             modelBuilder.Entity("SchoolProject.Data.Entities.Views.ViewDepartment", b =>
                 {
-                    b.Property<int>("DIO")
+                    b.Property<int>("DID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DIO"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DID"));
 
                     b.Property<string>("DNameAr")
                         .HasColumnType("nvarchar(max)");
@@ -150,7 +153,7 @@ namespace SchoolProject.infrustructure.Migrations
                     b.Property<int>("StudentCount")
                         .HasColumnType("int");
 
-                    b.HasKey("DIO");
+                    b.HasKey("DID");
 
                     b.ToTable("ViewDepartment");
                 });

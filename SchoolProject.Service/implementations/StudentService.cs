@@ -131,5 +131,11 @@ namespace SchoolProject.Service.implementations
             }
             return querable;
         }
+
+        public IQueryable<Student> GetStudentByDepartmentIdQuerable(int DIO)
+        {
+            return _studentRepository.GetTableNoTracking().Where(x => x.DIO.Equals(DIO)).AsQueryable();
+
+        }
     }
 }

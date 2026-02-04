@@ -22,6 +22,18 @@ builder.Services.AddDbContext<AppBDContext>(op =>
 {
     op.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+// AllowCORS
+var CORS = "_cors";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: CORS,
+                      policy =>
+                      {
+                          policy.AllowAnyHeader();
+                          policy.AllowAnyMethod();
+                          policy.AllowAnyOrigin();
+                      });
+});
 // Dependiency Injections
 builder.Services.AddInfrustructureDependencies()
     .AddServiceDependencies()
@@ -70,6 +82,7 @@ app.UseRequestLocalization(options.Value);
 app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.UseHttpsRedirection();
+app.UseCors(CORS);
 
 app.UseAuthorization();
 

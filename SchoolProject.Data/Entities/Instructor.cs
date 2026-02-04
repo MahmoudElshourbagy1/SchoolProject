@@ -1,10 +1,11 @@
 ﻿using SchoolProject.Data._ُEntities;
+using SchoolProject.Data.Commens;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SchoolProject.Data.Entities
 {
-    public class Instructor
+    public class Instructor : GeneralLocalizableEntity
     {
         public Instructor()
         {

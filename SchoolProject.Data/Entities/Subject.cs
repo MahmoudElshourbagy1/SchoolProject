@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SchoolProject.Data.Commens;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SchoolProject.Data.Entities
 {
-    public class Subjects
+    public class Subjects : GeneralLocalizableEntity
     {
         public Subjects()
         {
@@ -19,7 +20,7 @@ namespace SchoolProject.Data.Entities
         public string? SubjectNameAr { get; set; }
 
         public string? SubjectNameEn { get; set; }
-        public DateTime? Period { get; set; }
+        public int? Period { get; set; }
         [InverseProperty("Subject")]
         public virtual ICollection<StudentSubject> StudentsSubjects { get; set; }
         [InverseProperty("Subjects")]
