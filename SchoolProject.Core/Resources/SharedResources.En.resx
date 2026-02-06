@@ -126,6 +126,12 @@
   <data name="Deleted" xml:space="preserve">
     <value>Deleted successfully</value>
   </data>
+  <data name="DepartmentId" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="IsNotExist" xml:space="preserve">
+    <value>IsNotExist</value>
+  </data>
   <data name="IsExist" xml:space="preserve">
     <value>Is Already Exist</value>
   </data>
