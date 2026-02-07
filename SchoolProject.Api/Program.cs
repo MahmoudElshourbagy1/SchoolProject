@@ -37,7 +37,8 @@ builder.Services.AddCors(options =>
 // Dependiency Injections
 builder.Services.AddInfrustructureDependencies()
     .AddServiceDependencies()
-    .AddCoreDependencies();
+    .AddCoreDependencies()
+    .AddServiceRegistration();
 
 //Localization
 builder.Services.AddControllersWithViews();
