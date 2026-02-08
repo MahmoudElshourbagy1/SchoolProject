@@ -159,4 +159,16 @@
   <data name="Updated" xml:space="preserve">
     <value>تم التحديث بنجاح</value>
   </data>
+  <data name="PassNotEqualConfrimPass" xml:space="preserve">
+    <value>الباسورد والباسورد المؤكد غير متطابق</value>
+  </data>
+  <data name="EmailIsExist" xml:space="preserve">
+    <value>الايميل موجود بالفعل</value>
+  </data>
+  <data name="UserIsExist" xml:space="preserve">
+    <value>المستخدم موجود بالفعل</value>
+  </data>
+  <data name="FaildToAddUser" xml:space="preserve">
+    <value>حدث خطاء اثناء اضافه المستخدم</value>
+  </data>
 </root>
