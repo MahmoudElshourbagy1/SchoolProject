@@ -29,18 +29,7 @@ namespace SchoolProject.Api.Controllers
             var res = await Mediator.Send(new GetUserByIdQuery(id));
             return NewResult(res);
         }
-        [HttpGet(Router.AppUserRouting.Paginated)]
-        public async Task<IActionResult> Paginated([FromQuery] GetUserPaginationQuery query)
-        {
-            var res = await Mediator.Send(query);
-            return Ok(res);
-        }
-        [HttpGet(Router.AppUserRouting.GetByID)]
-        public async Task<IActionResult> GetstudentById([FromRoute] int id)
-        {
-            var res = await Mediator.Send(new GetUserByIdQuery(id));
-            return NewResult(res);
-        }
+
         [HttpPut(Router.AppUserRouting.Edit)]
         public async Task<IActionResult> EditStudent([FromBody] EditUserCommand command)
         {
