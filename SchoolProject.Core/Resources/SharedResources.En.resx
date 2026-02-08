@@ -160,7 +160,7 @@
     <value>Updated successfully</value>
   </data>
   <data name="PassNotEqualConfrimPass" xml:space="preserve">
-    <value>Password NotEqual Confrim Password</value>
+    <value>Pass Not Equal Confrim Pass</value>
   </data>
   <data name="EmailIsExist" xml:space="preserve">
     <value>Email Is Exist</value>
@@ -169,6 +169,9 @@
     <value>User Is Exist</value>
   </data>
   <data name="FaildToAddUser" xml:space="preserve">
-    <value>Faild To Add User</value>
+    <value>Faild To AddUser</value>
+  </data>
+  <data name="UpdateFailed" xml:space="preserve">
+    <value>Update Failed</value>
   </data>
 </root>

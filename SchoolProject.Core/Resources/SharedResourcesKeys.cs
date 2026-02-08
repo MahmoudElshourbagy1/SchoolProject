@@ -25,6 +25,7 @@
         public const string EmailIsExist = "EmailIsExist";
         public const string UserIsExist = "UserIsExist";
         public const string FaildToAddUser = "FaildToAddUser";
+        public const string UpdateFailed = "UpdateFailed";
 
     }
 }
