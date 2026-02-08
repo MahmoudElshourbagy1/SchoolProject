@@ -27,10 +27,11 @@ namespace SchoolProject.infrustructure.Data
         public DbSet<ViewDepartment> ViewDepartment { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<DepartmentStudentCountProc>()
       .HasNoKey()
       .ToView(null);
-            base.OnModelCreating(modelBuilder);
+
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 

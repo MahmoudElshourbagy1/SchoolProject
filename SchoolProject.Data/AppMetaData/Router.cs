@@ -24,5 +24,12 @@
             public const string GetDepartmentStudentsCountById = Prefix + "/Department-Students-Count-ById/{id}";
 
         }
+        public static class AppUserRouting
+        {
+            public const string Prefix = Rule + "User";
+            //  public const string GetByID = Prefix + "/Id";
+            public const string Create = Prefix + "/Create";
+        }
+
     }
 }
