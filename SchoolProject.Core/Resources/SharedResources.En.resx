@@ -174,4 +174,10 @@
   <data name="UpdateFailed" xml:space="preserve">
     <value>Update Failed</value>
   </data>
+  <data name="DeletedFailed" xml:space="preserve">
+    <value>Deleted Failed</value>
+  </data>
+  <data name="ChangePassFailed" xml:space="preserve">
+    <value>Change Password Failed</value>
+  </data>
 </root>

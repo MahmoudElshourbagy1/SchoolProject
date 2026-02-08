@@ -174,4 +174,10 @@
   <data name="UpdateFailed" xml:space="preserve">
     <value>حدث خطاء اثناء تحديث البيانات</value>
   </data>
+  <data name="DeletedFailed" xml:space="preserve">
+    <value>حدث خطاء اثناء عملية حذف البيانات</value>
+  </data>
+  <data name="ChangePassFailed" xml:space="preserve">
+    <value>حدث خطاء اثناء عملية تغير كلمة المرور</value>
+  </data>
 </root>

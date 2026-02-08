@@ -12,7 +12,7 @@ namespace SchoolProject.Api.Controllers
     public class AppUserController : AppControllerBase
     {
         [HttpPost(Router.AppUserRouting.Create)]
-        public async Task<IActionResult> Create([FromBody] AddUserCommand command)
+        public async Task<IActionResult> CreateUser([FromBody] AddUserCommand command)
         {
             var res = await Mediator.Send(command);
             return NewResult(res);
@@ -24,14 +24,25 @@ namespace SchoolProject.Api.Controllers
             return Ok(res);
         }
         [HttpGet(Router.AppUserRouting.GetByID)]
-        public async Task<IActionResult> GetstudentById([FromRoute] int id)
+        public async Task<IActionResult> GetUsertById([FromRoute] int id)
         {
             var res = await Mediator.Send(new GetUserByIdQuery(id));
             return NewResult(res);
         }
 
         [HttpPut(Router.AppUserRouting.Edit)]
-        public async Task<IActionResult> EditStudent([FromBody] EditUserCommand command)
+        public async Task<IActionResult> EditUser([FromBody] EditUserCommand command)
+        {
+            var res = await Mediator.Send(command);
+            return NewResult(res);
+        }
+        [HttpDelete(Router.AppUserRouting.Delete)]
+        public async Task<IActionResult> DeleteUser(int id)
+        {
+            return NewResult(await Mediator.Send(new DeleteUserCommand(id)));
+        }
+        [HttpPut(Router.AppUserRouting.ChangePassword)]
+        public async Task<IActionResult> ChangePasswordUser([FromBody] ChangeUserPasswordCommand command)
         {
             var res = await Mediator.Send(command);
             return NewResult(res);
