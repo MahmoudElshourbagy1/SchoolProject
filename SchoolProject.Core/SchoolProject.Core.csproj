@@ -23,10 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\AppUser\Queries\Handllers\" />
-    <Folder Include="Features\AppUser\Queries\Models\" />
-    <Folder Include="Features\AppUser\Queries\" />
-    <Folder Include="Mapping\AppUsers\Queries\" />
     <Folder Include="Mapping\Departments\CommandMapping\" />
   </ItemGroup>
 
