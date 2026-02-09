@@ -180,4 +180,16 @@
   <data name="ChangePassFailed" xml:space="preserve">
     <value>حدث خطاء اثناء عملية تغير كلمة المرور</value>
   </data>
+  <data name="Password" xml:space="preserve">
+    <value>كلمة المرور</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>اسم المستخدم</value>
+  </data>
+  <data name="UserNameIsNotExist" xml:space="preserve">
+    <value>اسم المستخدم غير صحيح</value>
+  </data>
+  <data name="PasswordNotCorrect" xml:space="preserve">
+    <value>كلمة المرور غير صحيحة</value>
+  </data>
 </root>

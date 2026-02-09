@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SchoolProject.infrustructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class Inity : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -185,6 +185,32 @@ namespace SchoolProject.infrustructure.Migrations
                     table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
                     table.ForeignKey(
                         name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserRefreshToken",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Token = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RefreshToken = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    JwtId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsUsed = table.Column<bool>(type: "bit", nullable: false),
+                    IsRevoked = table.Column<bool>(type: "bit", nullable: false),
+                    AddTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ExpiryDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserRefreshToken", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserRefreshToken_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -410,6 +436,11 @@ namespace SchoolProject.infrustructure.Migrations
                 table: "studentSubjects",
                 column: "StudID");
 
+            migrationBuilder.CreateIndex(
+                name: "IX_UserRefreshToken_UserId",
+                table: "UserRefreshToken",
+                column: "UserId");
+
             migrationBuilder.AddForeignKey(
                 name: "FK_departments_Instructor_InsManager",
                 table: "departments",
@@ -451,19 +482,22 @@ namespace SchoolProject.infrustructure.Migrations
                 name: "studentSubjects");
 
             migrationBuilder.DropTable(
+                name: "UserRefreshToken");
+
+            migrationBuilder.DropTable(
                 name: "ViewDepartment");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "students");
 
             migrationBuilder.DropTable(
                 name: "subjects");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Instructor");
