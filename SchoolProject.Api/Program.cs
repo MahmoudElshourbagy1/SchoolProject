@@ -38,7 +38,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddInfrustructureDependencies()
     .AddServiceDependencies()
     .AddCoreDependencies()
-    .AddServiceRegistration();
+    .AddServiceRegistration(builder.Configuration);
 
 //Localization
 builder.Services.AddControllersWithViews();
@@ -84,7 +84,7 @@ app.UseMiddleware<ErrorHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 app.UseCors(CORS);
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
