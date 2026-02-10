@@ -178,7 +178,19 @@
     <value>Deleted Failed</value>
   </data>
   <data name="ChangePassFailed" xml:space="preserve">
-    <value>Change Password Failed</value>
+    <value>Change Pass Failed</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>UserName</value>
+  </data>
+  <data name="UserNameIsNotExist" xml:space="preserve">
+    <value>User Name Is Not Exist</value>
+  </data>
+  <data name="PasswordNotCorrect" xml:space="preserve">
+    <value>PasswordNotCorrect</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>

@@ -5,6 +5,7 @@ using SchoolProject.Data.Entities.Identity;
 using SchoolProject.Data.Helpers;
 using SchoolProject.infrustructure.Abstracts;
 using SchoolProject.Service.Abstracts;
+using System.Collections.Concurrent;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -111,10 +112,21 @@ namespace SchoolProject.Service.implementations
                 ExpiryDate = DateTime.UtcNow.AddDays(_jwtSettings.RefreshTokenExpireDate),
                 TokenString = GenerateRefreshToken()
             };
+            _refreshTokens.AddOrUpdate(refreshToken.TokenString, refreshToken, (s, t) => refreshToken);
             return refreshToken;
         }
 
 
+        private readonly JwtSettings _jwtSettings;
+        private readonly ConcurrentDictionary<string, RefreshToken> _refreshTokens;
+        private readonly IRefreshTokenRepository _refreshTokenRepository;
+        public AuthenticationService(JwtSettings jwtSettings, IRefreshTokenRepository refreshTokenRepository)
+        {
+            _jwtSettings = jwtSettings;
+            _refreshTokenRepository = refreshTokenRepository;
+            _refreshTokens = new ConcurrentDictionary<string, RefreshToken>();
+
+        }
 
         public async Task<JwtAuthResult> GetJWTToken(User user)
         {
