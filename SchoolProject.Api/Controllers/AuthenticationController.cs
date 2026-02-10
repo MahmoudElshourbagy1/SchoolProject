@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SchoolProject.Api.Base;
 using SchoolProject.Core.Features.Authentication.Commands.Models;
+using SchoolProject.Core.Features.Authentication.Queries.Models;
 using SchoolProject.Data.AppMetaData;
 
 namespace SchoolProject.Api.Controllers
@@ -10,6 +11,18 @@ namespace SchoolProject.Api.Controllers
     {
         [HttpPost(Router.Authentication.SignIn)]
         public async Task<IActionResult> CreateUser([FromForm] SignInCommand command)
+        {
+            var res = await Mediator.Send(command);
+            return NewResult(res);
+        }
+        [HttpPost(Router.Authentication.RefreshToken)]
+        public async Task<IActionResult> RefreshToken([FromForm] RefreshTokenCommand command)
+        {
+            var res = await Mediator.Send(command);
+            return NewResult(res);
+        }
+        [HttpGet(Router.Authentication.ValidateToken)]
+        public async Task<IActionResult> ValidateToken([FromQuery] AuthorizeUserQuery command)
         {
             var res = await Mediator.Send(command);
             return NewResult(res);

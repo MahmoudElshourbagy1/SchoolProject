@@ -192,4 +192,19 @@
   <data name="PasswordNotCorrect" xml:space="preserve">
     <value>كلمة المرور غير صحيحة</value>
   </data>
+  <data name="Invalidtoken" xml:space="preserve">
+    <value>هناك خطاء في التوكين</value>
+  </data>
+  <data name="TokenisNotExpired" xml:space="preserve">
+    <value>رمز الوصول الذي تستخدمه ليس منتهي</value>
+  </data>
+  <data name="RefreshTokenisnotFound" xml:space="preserve">
+    <value>رمز الوصول الذي تستخدمه ليس موجود  </value>
+  </data>
+  <data name="RefreshTokenisExpired" xml:space="preserve">
+    <value>رمز الوصول الذي تستخدمه انتهي صلاحيته</value>
+  </data>
+  <data name="TokenisExpired" xml:space="preserve">
+    <value>رمز الوصول الذي تستخدمه منتهي</value>
+  </data>
 </root>
