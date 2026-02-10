@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using SchoolProject.Data.Entities.Identity;
 using SchoolProject.Data.Helpers;
@@ -18,15 +17,7 @@ namespace SchoolProject.Service.implementations
     public class AuthenticationService : IAuthenticationService
     {
 
-        private readonly JwtSettings _jwtSettings;
-        private readonly IRefreshTokenRepository _refreshTokenRepository;
-        private readonly UserManager<User> _userManager;
-        public AuthenticationService(JwtSettings jwtSettings, IRefreshTokenRepository refreshTokenRepository, UserManager<User> userManager)
-        {
-            _jwtSettings = jwtSettings;
-            _refreshTokenRepository = refreshTokenRepository;
-            _userManager = userManager;
-        }
+
 
 
         public async Task<string> ValidateToken(string token)
