@@ -42,8 +42,8 @@
             public const string Prefix = Rule + "Authentication";
             //  public const string GetByID = Prefix + "/Id";
             public const string SignIn = Prefix + "/SignIn";
+            public const string RefreshToken = Prefix + "/RefreshToken";
+            public const string ValidateToken = Prefix + "/Validate-Token";
         }
-
-
     }
 }

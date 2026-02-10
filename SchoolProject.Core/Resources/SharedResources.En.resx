@@ -192,4 +192,31 @@
   <data name="PasswordNotCorrect" xml:space="preserve">
     <value>PasswordNotCorrect</value>
   </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>UserName</value>
+  </data>
+  <data name="UserNameIsNotExist" xml:space="preserve">
+    <value>UserNameIsNotExist</value>
+  </data>
+  <data name="PasswordNotCorrect" xml:space="preserve">
+    <value>PasswordNotCorrect</value>
+  </data>
+  <data name="Invalidtoken" xml:space="preserve">
+    <value>Invalid token</value>
+  </data>
+  <data name="TokenisNotExpired" xml:space="preserve">
+    <value>Token is Not Expired</value>
+  </data>
+  <data name="RefreshTokenisnotFound" xml:space="preserve">
+    <value>Refresh Token is not Found</value>
+  </data>
+  <data name="RefreshTokenisExpired" xml:space="preserve">
+    <value>Refresh Token is Expired</value>
+  </data>
+  <data name="TokenisExpired" xml:space="preserve">
+    <value>Token is Expired</value>
+  </data>
 </root>
