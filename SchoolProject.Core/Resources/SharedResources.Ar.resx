@@ -207,4 +207,22 @@
   <data name="TokenisExpired" xml:space="preserve">
     <value>رمز الوصول الذي تستخدمه منتهي</value>
   </data>
+  <data name="AddFaild" xml:space="preserve">
+    <value>حدث خطاء في الاضافه</value>
+  </data>
+  <data name="RoleIsUsed" xml:space="preserve">
+    <value>هذه الصلاحية مستخدمة بالفعل لايمكن الحذف</value>
+  </data>
+  <data name="UserIsNotFound" xml:space="preserve">
+    <value>المستخدم غير موجود</value>
+  </data>
+  <data name="FailedToRemoveOldRoles" xml:space="preserve">
+    <value>فشل في خذف القوانين القديمة</value>
+  </data>
+  <data name="FailedToAddNewRoles" xml:space="preserve">
+    <value>فشل في اضافة القوانين الجديده</value>
+  </data>
+  <data name="FailedToUpdateUserRoles" xml:space="preserve">
+    <value>فشل في عملية تحديث قوانين المسنخدم</value>
+  </data>
 </root>

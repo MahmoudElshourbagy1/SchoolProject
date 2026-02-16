@@ -11,6 +11,7 @@ namespace SchoolProject.Service
             // Here you can add your infrastructure dependencies
             services.AddTransient<IStudentService, StudentService>();
             services.AddTransient<IDepartmentService, DepartmentService>();
+            services.AddTransient<IAuthorizationService, AuthorizationService>();
             services.AddTransient<IAuthenticationService, AuthenticationService>();
 
             return services;

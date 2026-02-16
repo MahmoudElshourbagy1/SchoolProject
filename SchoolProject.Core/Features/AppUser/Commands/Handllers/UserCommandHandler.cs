@@ -41,7 +41,8 @@ namespace SchoolProject.Core.Features.AppUser.Commands.Handllers
             var CreateResult = await _userManager.CreateAsync(identityUser, request.Password);
             //Faild to create Email
             if (!CreateResult.Succeeded) return BadRequest<string>(CreateResult.Errors.FirstOrDefault().Description);
-            //Massage
+            //Massage  
+                await _userManager.AddToRoleAsync(identityUser, "User");
             //Create user
             return Created("");
         }

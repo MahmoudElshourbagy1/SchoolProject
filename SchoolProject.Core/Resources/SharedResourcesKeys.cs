@@ -38,6 +38,12 @@
         public const string RefreshTokenisnotFound = "RefreshTokenisnotFound";
         public const string RefreshTokenisExpired = "RefreshTokenisExpired";
         public const string TokenisExpired = "TokenisExpired";
+        public const string AddFaild = "AddFaild";
+        public const string RoleIsUsed = "RoleIsUsed";
+        public const string UserIsNotFound = "UserIsNotFound";
+        public const string FailedToRemoveOldRoles = "FailedToRemoveOldRoles";
+        public const string FailedToAddNewRoles = "FailedToAddNewRoles";
+        public const string FailedToUpdateUserRoles = "FailedToUpdateUserRoles";
 
 
     }

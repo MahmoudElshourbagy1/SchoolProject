@@ -9,7 +9,7 @@ using System.Reflection;
 
 namespace SchoolProject.infrustructure.Data
 {
-    public class AppBDContext : IdentityDbContext<User, IdentityRole<int>, int, IdentityUserClaim<int>, IdentityUserRole<int>, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
+    public class AppBDContext : IdentityDbContext<User, Role, int, IdentityUserClaim<int>, IdentityUserRole<int>, IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
     {
         public AppBDContext(DbContextOptions<AppBDContext> options) : base(options)
         {
