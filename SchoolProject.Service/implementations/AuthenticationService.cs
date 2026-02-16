@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using SchoolProject.Data.Entities.Identity;
 using SchoolProject.Data.Helpers;
@@ -58,9 +59,10 @@ namespace SchoolProject.Service.implementations
             var jwtToken = tokenHandler.ReadJwtToken(token);
             return jwtToken;
         }
-        private (JwtSecurityToken, string) GenerateJWTToken(User user)
+        private async Task<(JwtSecurityToken, string)> GenerateJWTToken(User user)
         {
-            var claims = GetClaims(user);
+            var roles = await _userManager.GetRolesAsync(user);
+            var claims = GetClaims(user, roles.ToList());
             var token = new JwtSecurityToken(
                 _jwtSettings.Issuer,
                 _jwtSettings.Audience,
@@ -72,15 +74,20 @@ namespace SchoolProject.Service.implementations
             return (token, tokenString);
         }
         //GetClaims
-        public List<Claim> GetClaims(User user)
+        public List<Claim> GetClaims(User user, List<string> roles)
         {
             var claims = new List<Claim>
             {
-                new Claim(nameof(UserClaimModel.UserName), user.UserName),
-                new Claim(nameof(UserClaimModel.Email), user.Email),
-                new Claim(nameof(UserClaimModel.PhoneNumber), user.PhoneNumber),
+                new Claim (ClaimTypes.NameIdentifier, user.UserName??""),
+                new Claim (ClaimTypes.Email, user.Email??""),
+                new Claim (ClaimTypes.MobilePhone, user.PhoneNumber??""),
+                new Claim (ClaimTypes.Name, user.FullName),
                 new Claim (nameof(UserClaimModel.Id), user.Id.ToString())
             };
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
             return claims;
         }
         //GenerateRefreshToken
@@ -111,17 +118,18 @@ namespace SchoolProject.Service.implementations
         private readonly JwtSettings _jwtSettings;
         private readonly ConcurrentDictionary<string, RefreshToken> _refreshTokens;
         private readonly IRefreshTokenRepository _refreshTokenRepository;
-        public AuthenticationService(JwtSettings jwtSettings, IRefreshTokenRepository refreshTokenRepository)
+        private readonly UserManager<User> _userManager;
+        public AuthenticationService(JwtSettings jwtSettings, IRefreshTokenRepository refreshTokenRepository, UserManager<User> userManager)
         {
             _jwtSettings = jwtSettings;
             _refreshTokenRepository = refreshTokenRepository;
             _refreshTokens = new ConcurrentDictionary<string, RefreshToken>();
-
+            _userManager = userManager;
         }
 
         public async Task<JwtAuthResult> GetJWTToken(User user)
         {
-            var (token, tokenString) = GenerateJWTToken(user);
+            var (token, tokenString) = await GenerateJWTToken(user);
             var refreshToken = GetRefreshToken(user.UserName);
             var userRefreshToken = new UserRefreshToken
             {
@@ -144,7 +152,7 @@ namespace SchoolProject.Service.implementations
 
         public async Task<JwtAuthResult> GetRefreshToken(User user, JwtSecurityToken accesstoken, DateTime? expiryDate, string refreshToken)
         {
-            var (jwtSecurityToken, newToken) = GenerateJWTToken(user);
+            var (jwtSecurityToken, newToken) = await GenerateJWTToken(user);
             var res = new JwtAuthResult();
             res.AccessToken = newToken;
             var refreshTokenResult = new RefreshToken();
