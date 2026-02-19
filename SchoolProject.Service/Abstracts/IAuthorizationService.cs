@@ -1,5 +1,7 @@
 ﻿using SchoolProject.Data.DTOS;
 using SchoolProject.Data.Entities.Identity;
+using SchoolProject.Data.Requests;
+using SchoolProject.Data.Results;
 
 namespace SchoolProject.Service.Abstracts
 {
@@ -12,7 +14,10 @@ namespace SchoolProject.Service.Abstracts
         public Task<bool> IsRoleExistById(int roleId);
         public Task<List<Role>> GetRolesList();
         public Task<Role> GetRolesById(int id);
-        public Task<ManageUserRolesResult> GetManageUserRolesData(User user);
+        public Task<ManageUserRolesResult> ManageUserRolesData(User user);
         public Task<string> UpdateUserRoles(UpdateUserRolesRequest result);
+        public Task<ManageUserClaimsResult> ManageUserClaimsData(User user);
+        public Task<string> UpdateUserClaims(UodateUserClaimsRequest result);
+
     }
 }

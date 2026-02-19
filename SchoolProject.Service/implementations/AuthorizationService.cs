@@ -1,10 +1,14 @@
 ﻿
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using SchoolProject.Data.DTOS;
 using SchoolProject.Data.Entities.Identity;
+using SchoolProject.Data.Helpers;
+using SchoolProject.Data.Requests;
+using SchoolProject.Data.Results;
 using SchoolProject.infrustructure.Data;
 using SchoolProject.Service.Abstracts;
+using System.Data;
+using System.Security.Claims;
 
 namespace SchoolProject.Service.implementations
 {
@@ -40,7 +44,7 @@ namespace SchoolProject.Service.implementations
 
             return await _roleManager.RoleExistsAsync(roleName);
         }
-        public async Task<string> EditRoleAsync(EditRoleRequest request)
+        public async Task<string> EditRoleAsync(Data.DTOS.EditRoleRequest request)
         {
             // check if role exist or not
             var role = await _roleManager.FindByIdAsync(request.Id.ToString());
@@ -89,7 +93,7 @@ namespace SchoolProject.Service.implementations
             return roles;
         }
 
-        public async Task<ManageUserRolesResult> GetManageUserRolesData(User user)
+        public async Task<ManageUserRolesResult> ManageUserRolesData(User user)
         {
             var respone = new ManageUserRolesResult();
             var Roles = new List<Roles>();
@@ -146,6 +150,61 @@ namespace SchoolProject.Service.implementations
             {
                 await transact.RollbackAsync();
                 return "FailedToUpdateUserRoles";
+            }
+        }
+        public async Task<ManageUserClaimsResult> ManageUserClaimsData(User user)
+        {
+            var response = new ManageUserClaimsResult();
+            var userClaimsList = new List<UserClaims>();
+            response.UserId = user.Id;
+            //Get User Claims
+            var userClaims = await _userManager.GetClaimsAsync(user);
+            //Check If Claims Exist For User Then Valuse = true
+            foreach (var claim in ClaimsStore.claims)
+            {
+                var userClaim = new UserClaims();
+                userClaim.Type = claim.Type;
+                if (userClaims.Any(x => x.Type == claim.Type))
+                {
+                    userClaim.Valve = true;
+                }
+                else
+                {
+                    userClaim.Valve = false;
+                }
+                userClaimsList.Add(userClaim);
+            }
+            response.userClaims = userClaimsList;
+            //return
+            return response;
+        }
+
+        public async Task<string> UpdateUserClaims(UodateUserClaimsRequest result)
+        {
+            var transact = await _appBDContext.Database.BeginTransactionAsync();
+            try
+            {
+                var user = await _userManager.FindByIdAsync(result.UserId.ToString());
+
+                if (user == null)
+                {
+                    return "UserIsNull";
+                }
+                //remove old claims
+                var userClaims = await _userManager.GetClaimsAsync(user);
+                var removeClaimsResult = await _userManager.RemoveClaimsAsync(user, userClaims);
+                if (!removeClaimsResult.Succeeded) return "FailedToRemoveOldClaims";
+                var claims = result.userClaims.Where(x => x.Valve == true).Select(x => new Claim(x.Type, x.Valve.ToString()));
+                var addUserClaimsResult = await _userManager.AddClaimsAsync(user, claims);
+                if (!addUserClaimsResult.Succeeded) return "FailedToAddNewClaims";
+
+                await transact.CommitAsync();
+                return "Success";
+            }
+            catch (Exception ex)
+            {
+                await transact.RollbackAsync();
+                return "FailedToUpdateClaims";
             }
         }
     }
