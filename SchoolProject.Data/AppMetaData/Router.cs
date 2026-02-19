@@ -51,10 +51,12 @@
             public const string Create = Prefix + "/Role/Create";
             public const string Edit = Prefix + "/Role/Edit";
             public const string Delete = Prefix + "/Role/Delete/{id}";
-            public const string RoleList = Prefix + "/Role-List";
-            public const string GetRoleById = Prefix + "/Role-By-Id/{id}";
-            public const string ManageUserRoles = Prefix + "/Manage-User-Roles/{userid}";
-            public const string UserRolesUpdate = Prefix + "/User-Roles-Update";
+            public const string RoleList = Prefix + "/Role/Role-List";
+            public const string GetRoleById = Prefix + "/Role/Role-By-Id/{id}";
+            public const string ManageUserRoles = Prefix + "/Role/Manage-User-Roles/{userid}";
+            public const string ManageUserCliams = Prefix + "/Role/Manage-User-Cliams/{userid}";
+            public const string UserRolesUpdate = Prefix + "/Role/User-Roles-Update";
+            public const string UodateUserClaims = Prefix + "/Role/Uodate-User-Claims";
         }
     }
 }

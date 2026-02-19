@@ -225,4 +225,13 @@
   <data name="FailedToUpdateUserRoles" xml:space="preserve">
     <value>فشل في عملية تحديث قوانين المسنخدم</value>
   </data>
+  <data name="FailedToRemoveOldClaims" xml:space="preserve">
+    <value>فشل في إزالة المطالبات القديمة</value>
+  </data>
+  <data name="FailedToAddNewClaims" xml:space="preserve">
+    <value>فشل في إضافة المطالبات الجديدة</value>
+  </data>
+  <data name="FailedToUpdateClaims" xml:space="preserve">
+    <value>فشل في تحديث المطالبات</value>
+  </data>
 </root>
