@@ -1,7 +1,6 @@
 ﻿
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using SchoolProject.Data.DTOS;
 using SchoolProject.Data.Entities.Identity;
 using SchoolProject.Data.Helpers;
 using SchoolProject.Data.Requests;
@@ -45,7 +44,7 @@ namespace SchoolProject.Service.implementations
 
             return await _roleManager.RoleExistsAsync(roleName);
         }
-        public async Task<string> EditRoleAsync(EditRoleRequest request)
+        public async Task<string> EditRoleAsync(Data.DTOS.EditRoleRequest request)
         {
             // check if role exist or not
             var role = await _roleManager.FindByIdAsync(request.Id.ToString());

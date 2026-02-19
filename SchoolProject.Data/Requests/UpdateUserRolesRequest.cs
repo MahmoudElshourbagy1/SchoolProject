@@ -1,6 +1,6 @@
 ﻿using SchoolProject.Data.Results;
 
-namespace SchoolProject.Data.DTOS
+namespace SchoolProject.Data.Requests
 {
     public class UpdateUserRolesRequest : ManageUserRolesResult
     {
