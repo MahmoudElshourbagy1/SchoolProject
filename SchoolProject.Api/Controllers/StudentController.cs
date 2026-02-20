@@ -10,7 +10,7 @@ namespace SchoolProject.Api.Controllers
 {
 
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class StudentController : AppControllerBase
     {
 
@@ -34,18 +34,21 @@ namespace SchoolProject.Api.Controllers
             var res = await Mediator.Send(new GetStudentByIdQuery(id));
             return NewResult(res);
         }
+        [Authorize(Policy = "CreateStudent")]
         [HttpPost(Router.StudentRouting.Create)]
         public async Task<IActionResult> CreateStudent([FromBody] AddStudentCommand command)
         {
             var res = await Mediator.Send(command);
             return NewResult(res);
         }
+        [Authorize(Policy = "EditStudent")]
         [HttpPut(Router.StudentRouting.Edit)]
         public async Task<IActionResult> EditStudent([FromBody] EditStudentCommand command)
         {
             var res = await Mediator.Send(command);
             return NewResult(res);
         }
+        [Authorize(Policy = "DeleteStudent")]
         [HttpDelete(Router.StudentRouting.Delete)]
         public async Task<IActionResult> DeleteStudent(int id)
         {
