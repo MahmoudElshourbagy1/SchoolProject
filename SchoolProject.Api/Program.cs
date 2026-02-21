@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 using SchoolProject.Core;
 using SchoolProject.Core.MiddleWare;
 using SchoolProject.Data.Entities.Identity;
+using SchoolProject.Data.Helpers;
 using SchoolProject.infrustructure;
 using SchoolProject.infrustructure.Data;
 using SchoolProject.infrustructure.Seeder;
@@ -12,6 +13,8 @@ using SchoolProject.Service;
 using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.Configure<EmailSettings>(
+    builder.Configuration.GetSection("EmailSettings"));
 //Add service Containers
 
 builder.Services.AddControllers();
@@ -65,6 +68,8 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.SupportedUICultures = supportedCultures;
 });
 
+builder.Services.Configure<EmailSettings>(
+    builder.Configuration.GetSection("EmailSettings"));
 
 
 
