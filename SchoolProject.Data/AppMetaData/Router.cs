@@ -58,5 +58,10 @@
             public const string UserRolesUpdate = Prefix + "/Role/User-Roles-Update";
             public const string UodateUserClaims = Prefix + "/Role/Uodate-User-Claims";
         }
+        public static class EmailsRouting
+        {
+            public const string Prefix = Rule + "EmailsRouting";
+            public const string SendEmail = Prefix + "/SendEmail";
+        }
     }
 }
