@@ -8,11 +8,14 @@ using SchoolProject.Service.Abstracts;
 namespace SchoolProject.Core.Features.Authentication.Queries.Handlers
 {
     public class AuthenticationQueryHandler : ResponseHandler,
-        IRequestHandler<AuthorizeUserQuery, Response<string>>
+        IRequestHandler<AuthorizeUserQuery, Response<string>>,
+        IRequestHandler<ConfirmEmailQuery, Response<string>>,
+        IRequestHandler<RestPasswordQuery, Response<string>>
 
     {
         private readonly IStringLocalizer<SharedResources> _stringLocalizer;
         private readonly IAuthenticationService _authenticationService;
+
         public AuthenticationQueryHandler(IStringLocalizer<SharedResources> stringLocalizer, IAuthenticationService authenticationService) : base(stringLocalizer)
         {
             _stringLocalizer = stringLocalizer;
@@ -29,6 +32,25 @@ namespace SchoolProject.Core.Features.Authentication.Queries.Handlers
             else
             {
                 return Unauthorized<string>(_stringLocalizer[SharedResourcesKeys.TokenisExpired]);
+            }
+        }
+
+        public async Task<Response<string>> Handle(ConfirmEmailQuery request, CancellationToken cancellationToken)
+        {
+            var confirmEmail = await _authenticationService.ConfirmEmail(request.userId, request.code);
+            if (confirmEmail == "ErrorWhenConfirmEmail") return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.ErrorWhenConfirmEmail]);
+            return Success<string>(_stringLocalizer[SharedResourcesKeys.ConfirmEmailDone]);
+        }
+
+        public async Task<Response<string>> Handle(RestPasswordQuery request, CancellationToken cancellationToken)
+        {
+            var result = await _authenticationService.ConfirmResetPassword(request.Code, request.Email);
+            switch (result)
+            {
+                case "UserNotFound": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.UserIsNotFound]);
+                case "Failed": return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.InvalidCode]);
+                case "Success": return Success<string>("");
+                default: return BadRequest<string>(_stringLocalizer[SharedResourcesKeys.InvalidCode]);
             }
         }
     }
