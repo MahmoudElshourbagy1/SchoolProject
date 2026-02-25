@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using EntityFrameworkCore.EncryptColumn.Interfaces;
+using EntityFrameworkCore.EncryptColumn.Util;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using SchoolProject.Data.Entities.Identity;
 using SchoolProject.Data.Helpers;
 using SchoolProject.Data.Results;
 using SchoolProject.infrustructure.Abstracts;
+using SchoolProject.infrustructure.Data;
 using SchoolProject.Service.Abstracts;
 using System.Collections.Concurrent;
 using System.IdentityModel.Tokens.Jwt;
@@ -19,9 +22,23 @@ namespace SchoolProject.Service.implementations
     public class AuthenticationService : IAuthenticationService
     {
 
-
-
-
+        private readonly JwtSettings _jwtSettings;
+        private readonly ConcurrentDictionary<string, RefreshToken> _refreshTokens;
+        private readonly IRefreshTokenRepository _refreshTokenRepository;
+        private readonly UserManager<User> _userManager;
+        private readonly IEmailsService _emailsService;
+        private readonly AppBDContext _appBDContext;
+        private readonly IEncryptionProvider _encryptionProvider;
+        public AuthenticationService(JwtSettings jwtSettings, IRefreshTokenRepository refreshTokenRepository, UserManager<User> userManager, IEmailsService emailsService, AppBDContext appBDContext)
+        {
+            _jwtSettings = jwtSettings;
+            _refreshTokenRepository = refreshTokenRepository;
+            _refreshTokens = new ConcurrentDictionary<string, RefreshToken>();
+            _userManager = userManager;
+            _emailsService = emailsService;
+            _appBDContext = appBDContext;
+            _encryptionProvider = new GenerateEncryptionProvider("1234567890123456");
+        }
         public async Task<string> ValidateToken(string token)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -119,17 +136,7 @@ namespace SchoolProject.Service.implementations
         }
 
 
-        private readonly JwtSettings _jwtSettings;
-        private readonly ConcurrentDictionary<string, RefreshToken> _refreshTokens;
-        private readonly IRefreshTokenRepository _refreshTokenRepository;
-        private readonly UserManager<User> _userManager;
-        public AuthenticationService(JwtSettings jwtSettings, IRefreshTokenRepository refreshTokenRepository, UserManager<User> userManager)
-        {
-            _jwtSettings = jwtSettings;
-            _refreshTokenRepository = refreshTokenRepository;
-            _refreshTokens = new ConcurrentDictionary<string, RefreshToken>();
-            _userManager = userManager;
-        }
+
 
         public async Task<JwtAuthResult> GetJWTToken(User user)
         {
@@ -197,6 +204,81 @@ namespace SchoolProject.Service.implementations
             }
             var expiredDate = username.ExpiryDate;
             return (userId, expiredDate);
+        }
+
+        public async Task<string> ConfirmEmail(int? userId, string? code)
+        {
+            if (userId == null || code == null) return "ErrorWhenConfirmEmail";
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            var confirmEmail = await _userManager.ConfirmEmailAsync(user, code);
+            if (!confirmEmail.Succeeded) return "ErrorWhenConfirmEmail";
+            return "Success";
+        }
+
+        public async Task<string> SendResetPasswordCode(string Email)
+        {
+            var trans = await _appBDContext.Database.BeginTransactionAsync();
+            try
+            {
+                //user 
+                var user = await _userManager.FindByEmailAsync(Email);
+                //not found
+                if (user == null) return "UserNotFound";
+                //Generate Random Number
+                Random generator = new Random();
+                string ramdomCode = generator.Next(0, 1000000).ToString("D6");
+                //update user In Database code
+                user.Code = ramdomCode;
+                var updateResult = await _userManager.UpdateAsync(user);
+                if (!updateResult.Succeeded) return "ErrorInUpdateUser";
+                //send code to email
+                var message = "Code To Rest Password : " + ramdomCode;
+                await _emailsService.SendEmailAsync(user.Email, message, "RestPassword");
+                await trans.CommitAsync();
+                return "Success";
+            }
+            catch (Exception ex)
+            {
+                await trans.RollbackAsync();
+                return "Failed";
+            }
+        }
+
+        public async Task<string> ConfirmResetPassword(string Code, string Email)
+        {
+            //Get user
+            var user = await _userManager.FindByEmailAsync(Email);
+            //not found
+            if (user == null) return "UserNotFound";
+            //Decrept code db user code
+            var userCode = user.Code;
+            //Equal with code
+            if (userCode == Code) return "Success";
+            return "Failed";
+
+        }
+
+        public async Task<string> ResetPassword(string Password, string Email)
+        {
+            var trans = await _appBDContext.Database.BeginTransactionAsync();
+            try
+            {
+                var user = await _userManager.FindByEmailAsync(Email);
+                //not found
+                if (user == null) return "UserNotFound";
+                await _userManager.RemovePasswordAsync(user);
+                if (!await _userManager.HasPasswordAsync(user))
+                {
+                    await _userManager.AddPasswordAsync(user, Password);
+                }
+                await trans.CommitAsync();
+                return "Success";
+            }
+            catch (Exception ex)
+            {
+                await trans.RollbackAsync();
+                return "Failed";
+            }
         }
     }
 }

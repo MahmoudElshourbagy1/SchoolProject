@@ -34,7 +34,7 @@ namespace SchoolProject.infrustructure
                 op.User.AllowedUserNameCharacters =
                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
                 op.User.RequireUniqueEmail = true;
-                op.SignIn.RequireConfirmedEmail = false;
+                op.SignIn.RequireConfirmedEmail = true;
 
             }).AddEntityFrameworkStores<AppBDContext>().AddDefaultTokenProviders();
 

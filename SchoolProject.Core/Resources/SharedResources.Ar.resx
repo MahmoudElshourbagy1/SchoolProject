@@ -243,4 +243,22 @@
   <data name="SendEmailFailed" xml:space="preserve">
     <value>حدث خطأ في أثناء ارسال الايميل</value>
   </data>
+  <data name="EmailNotConfirmed" xml:space="preserve">
+    <value>من فضلك قم بتأكيد الإيميل</value>
+  </data>
+  <data name="TryToRegisterAgain" xml:space="preserve">
+    <value>حاول التسجيل مرة اخري</value>
+  </data>
+  <data name="ErrorWhenConfirmEmail" xml:space="preserve">
+    <value>خطأ أثناء عملية التأكيد الإيميل</value>
+  </data>
+  <data name="ConfirmEmailDone" xml:space="preserve">
+    <value>تم تأكيد الأيميل بنجاح</value>
+  </data>
+  <data name="TryAgainAnotherTime" xml:space="preserve">
+    <value>حدث خطأ في العملية من فضلك حاول مرة اخري في وقت لاحق</value>
+  </data>
+  <data name="InvalidCode" xml:space="preserve">
+    <value>هذا الكود غير صحيح</value>
+  </data>
 </root>
