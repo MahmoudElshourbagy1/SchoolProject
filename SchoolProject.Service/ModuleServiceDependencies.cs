@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SchoolProject.Service.Abstracts;
+using SchoolProject.Service.AuthServices.implementations;
+using SchoolProject.Service.AuthServices.Interfaces;
 using SchoolProject.Service.implementations;
 
 namespace SchoolProject.Service
@@ -15,6 +17,7 @@ namespace SchoolProject.Service
             services.AddTransient<IAuthenticationService, AuthenticationService>();
             services.AddTransient<IEmailsService, EmailsService>();
             services.AddTransient<IAppUserService, AppUserService>();
+            services.AddTransient<ICurrentUserServices, CurrentUserServices>();
             return services;
         }
 
