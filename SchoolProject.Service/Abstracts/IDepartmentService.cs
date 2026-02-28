@@ -1,5 +1,5 @@
 ﻿using SchoolProject.Data._ُEntities;
-using SchoolProject.Data.Entities;
+using SchoolProject.Data.Entities.Procedures;
 using SchoolProject.Data.Entities.Views;
 
 namespace SchoolProject.Service.Abstracts
