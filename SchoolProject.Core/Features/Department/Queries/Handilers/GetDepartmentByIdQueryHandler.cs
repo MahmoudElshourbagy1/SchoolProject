@@ -7,7 +7,7 @@ using SchoolProject.Core.Features.Department.Queries.Results;
 using SchoolProject.Core.Resources;
 using SchoolProject.Core.Wrappers;
 using SchoolProject.Data._ُEntities;
-using SchoolProject.Data.Entities;
+using SchoolProject.Data.Entities.Procedures;
 using SchoolProject.Service.Abstracts;
 using System.Linq.Expressions;
 

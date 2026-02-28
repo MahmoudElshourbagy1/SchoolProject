@@ -1,6 +1,6 @@
 ﻿using SchoolProject.Data.Commens;
 
-namespace SchoolProject.Data.Entities
+namespace SchoolProject.Data.Entities.Procedures
 {
 
     public class DepartmentStudentCountProc : GeneralLocalizableEntity

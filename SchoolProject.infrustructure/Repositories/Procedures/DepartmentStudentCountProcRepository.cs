@@ -1,4 +1,4 @@
-﻿using SchoolProject.Data.Entities;
+﻿using SchoolProject.Data.Entities.Procedures;
 using SchoolProject.infrustructure.Abstracts.Procedures;
 using SchoolProject.infrustructure.Data;
 using StoredProcedureEFCore;

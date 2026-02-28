@@ -1,6 +1,6 @@
 ﻿using SchoolProject.Core.Features.Department.Queries.Models;
 using SchoolProject.Core.Features.Department.Queries.Results;
-using SchoolProject.Data.Entities;
+using SchoolProject.Data.Entities.Procedures;
 
 namespace SchoolProject.Core.Mapping.Departments
 {

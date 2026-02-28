@@ -1,4 +1,4 @@
-﻿using SchoolProject.Data.Entities;
+﻿using SchoolProject.Data.Entities.Procedures;
 
 namespace SchoolProject.infrustructure.Abstracts.Procedures
 {
