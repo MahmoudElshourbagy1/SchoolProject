@@ -11,7 +11,7 @@ namespace SchoolProject.Api.Controllers
 {
 
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,User")]
     public class StudentController : AppControllerBase
     {
         [HttpGet(Router.StudentRouting.List)]
