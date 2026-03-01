@@ -235,30 +235,39 @@
     <value>فشل في تحديث المطالبات</value>
   </data>
   <data name="Email" xml:space="preserve">
-    <value>الايميل</value>
+    <value>البريد الإلكتروني</value>
   </data>
   <data name="Message" xml:space="preserve">
     <value>الرسالة</value>
   </data>
   <data name="SendEmailFailed" xml:space="preserve">
-    <value>حدث خطأ في أثناء ارسال الايميل</value>
+    <value>فشل إرسال البريد الإلكتروني</value>
   </data>
   <data name="EmailNotConfirmed" xml:space="preserve">
-    <value>من فضلك قم بتأكيد الإيميل</value>
+    <value>البريد الإلكتروني غير مؤكد</value>
   </data>
   <data name="TryToRegisterAgain" xml:space="preserve">
-    <value>حاول التسجيل مرة اخري</value>
+    <value>حاول التسجيل مرة أخرى</value>
   </data>
   <data name="ErrorWhenConfirmEmail" xml:space="preserve">
-    <value>خطأ أثناء عملية التأكيد الإيميل</value>
+    <value>خطأ عند تأكيد البريد الإلكتروني</value>
   </data>
   <data name="ConfirmEmailDone" xml:space="preserve">
-    <value>تم تأكيد الأيميل بنجاح</value>
+    <value>تم تأكيد البريد الإلكتروني</value>
   </data>
   <data name="TryAgainAnotherTime" xml:space="preserve">
-    <value>حدث خطأ في العملية من فضلك حاول مرة اخري في وقت لاحق</value>
+    <value>حاول مرة أخرى في وقت آخر</value>
   </data>
-  <data name="InvalidCode" xml:space="preserve">
-    <value>هذا الكود غير صحيح</value>
+  <data name="Invalid Code" xml:space="preserve">
+    <value>رمز غير صالح</value>
+  </data>
+  <data name="NoFileUploaded" xml:space="preserve">
+    <value>لم يتم رفع أي ملف</value>
+  </data>
+  <data name="FailedToUploadFile" xml:space="preserve">
+    <value>فشل تحميل الملف</value>
+  </data>
+  <data name="FailedInAdd" xml:space="preserve">
+    <value>فشل في الإضافة</value>
   </data>
 </root>

@@ -56,6 +56,9 @@
         public const string ConfirmEmailDone = "ConfirmEmailDone";
         public const string TryAgainAnotherTime = "TryAgainAnotherTime";
         public const string InvalidCode = "InvalidCode";
+        public const string NoFileUploaded = "NoFileUploaded";
+        public const string FailedToUploadFile = "FailedToUploadFile";
+        public const string FailedInAdd = "FailedInAdd";
 
 
     }

@@ -258,7 +258,16 @@
   <data name="TryAgainAnotherTime" xml:space="preserve">
     <value>Try Again Another Time</value>
   </data>
-  <data name="InvalidCode" xml:space="preserve">
+  <data name="Invalid Code" xml:space="preserve">
     <value>Invalid Code</value>
+  </data>
+  <data name="NoFileUploaded" xml:space="preserve">
+    <value>No File Uploaded</value>
+  </data>
+  <data name="FailedToUploadFile" xml:space="preserve">
+    <value>Failed To Upload File</value>
+  </data>
+  <data name="FailedInAdd" xml:space="preserve">
+    <value>FailedI n Add</value>
   </data>
 </root>
