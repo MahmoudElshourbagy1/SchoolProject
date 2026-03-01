@@ -38,7 +38,7 @@ The project follows **Layered / Clean Architecture** for maintainability and sca
 
 ## 🧰 Technologies Used
 
-- C# / .NET 6+
+- C# / .NET 8+
 - ASP.NET Core Web API
 - Entity Framework Core
 - SQL Server
