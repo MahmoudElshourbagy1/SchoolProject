@@ -47,7 +47,7 @@ The project follows **Layered / Clean Architecture** for maintainability and sca
 - Swagger (API Documentation)
 - CI/CD pipeline configured for automated deployment
 
----
+----
 
 ## 🚀 Getting Started
 
