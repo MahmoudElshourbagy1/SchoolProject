@@ -1,5 +1,6 @@
 ﻿
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SchoolProject.Api.Base;
 using SchoolProject.Core.Features.AppUser.Commands.Models;
@@ -9,6 +10,7 @@ using SchoolProject.Data.AppMetaData;
 namespace SchoolProject.Api.Controllers
 {
     [ApiController]
+    [Authorize(Roles = "Admin,User")]
     public class AppUserController : AppControllerBase
     {
         [HttpPost(Router.AppUserRouting.Create)]

@@ -14,6 +14,7 @@ using SchoolProject.infrustructure;
 using SchoolProject.infrustructure.Data;
 using SchoolProject.infrustructure.Seeder;
 using SchoolProject.Service;
+using Serilog;
 using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -83,6 +84,11 @@ builder.Services.AddTransient<IUrlHelper>(x =>
 });
 
 builder.Services.AddTransient<AuthFilter>();
+//serilog 
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration).CreateLogger();
+builder.Services.AddLogging();
+
 
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())

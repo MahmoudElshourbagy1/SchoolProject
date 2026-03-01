@@ -70,7 +70,7 @@ namespace SchoolProject.Core.Features.Students.Commands.Handilers
             //Check if th id is Exsit
             var student = await _studentService.GetByIDAsync(request.Id);
             //return NotFound<string>("student not found");
-            if (student == null) return NotFound<string>("student not found");
+            //if (student == null) return NotFound<string>("student not found");
             //call Delete method from service
             var result = await _studentService.DeleteAsync(student);
             //return Success("Updated Success");
